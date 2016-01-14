@@ -1,8 +1,31 @@
 #include <vector>
 #include <iostream>
 #include <algorithm>
+#include <map>
 #include "gtest/gtest.h"
 using namespace std;
+
+//--- revised ---
+class RevisedSolution{
+public: 
+    vector<int> twoSum(vector<int>& nums, int target){
+        map<int, int> indexLookUp;
+        int index = 0;
+        while (index != nums.size()){
+            map<int, int>::iterator it = indexLookUp.find(target - nums[index]);
+            if(it != indexLookUp.end()){
+                vector<int> result;
+                result.push_back(it->second);
+                result.push_back(index);
+                return result;
+            }
+            indexLookUp[nums[index]] = index;
+            index++;
+        }
+    }
+};
+
+// --- origin ---
 
 class IndexCompare{
 public:
